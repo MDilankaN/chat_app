@@ -24,7 +24,21 @@ class _MyHomePageState extends State<MyHomePage>
           title: Text(widget.title),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+            PopupMenuButton<String>(
+                onSelected: ((value) => {print(value)}),
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem(child: Text("New group"), value: "New group"),
+                    PopupMenuItem(
+                        child: Text("New broadcast"), value: "New broadcast"),
+                    PopupMenuItem(
+                        child: Text("Whatsapp Web"), value: "Whatsapp Web"),
+                    PopupMenuItem(
+                        child: Text("Starred Message"),
+                        value: "Starred Message"),
+                    PopupMenuItem(child: Text("Settings"), value: "Settings"),
+                  ];
+                })
           ],
           bottom: TabBar(
             controller: _controller,
