@@ -11,8 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Chat App Clone',
+      // title: 'Chat App Clone',
       theme: ThemeData(
+          fontFamily: "OpenSans",
           primaryColor: const Color(0xff075e54),
           accentColor: const Color(0xff128c7e)),
       home: const MyHomePage(title: 'Chat App Clone'),
