@@ -1,3 +1,4 @@
+import 'package:chat_app/Pages/ChatPage.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xff075e54),
           title: Text(widget.title),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search)),
@@ -56,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>
           controller: _controller,
           children: [
             Text("camera"),
-            Text("chats"),
+            ChatPage(),
             Text("status"),
             Text("callse"),
           ],
