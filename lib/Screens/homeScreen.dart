@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage>
           ],
           bottom: TabBar(
             controller: _controller,
+            indicatorColor: Colors.white,
             tabs: [
               Tab(
                 icon: Icon(Icons.camera_alt),

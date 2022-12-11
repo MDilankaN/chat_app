@@ -13,6 +13,7 @@ class _ChatPage extends State<ChatPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => {},
+        child: Icon(Icons.chat),
       ),
     );
   }
