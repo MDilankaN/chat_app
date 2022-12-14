@@ -29,11 +29,11 @@ class _CreateGroupState extends State<CreateGroup> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Select contact",
+                  "New Group",
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '256contacts',
+                  'Add participants',
                   style: TextStyle(fontSize: 13),
                 )
               ]),

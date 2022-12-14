@@ -1,5 +1,5 @@
 import 'package:chat_app/Model/ChatModel.dart';
-import 'package:chat_app/Screens/CreateProfile.dart';
+import 'package:chat_app/Screens/CreateGroup.dart';
 import 'package:chat_app/Widgets/ButtonCard.dart';
 import 'package:chat_app/Widgets/ContactCard.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class _SelectContatctState extends State<SelectContatct> {
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '256contacts',
+                  '256 contacts',
                   style: TextStyle(fontSize: 13),
                 )
               ]),
@@ -59,10 +59,8 @@ class _SelectContatctState extends State<SelectContatct> {
               if (index == 0) {
                 return InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => CreateProfile()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => CreateGroup()));
                   },
                   child: ButtonCard(
                     icon: Icons.group,
