@@ -3,14 +3,14 @@ import 'package:chat_app/Widgets/ButtonCard.dart';
 import 'package:chat_app/Widgets/ContactCard.dart';
 import 'package:flutter/material.dart';
 
-class CreateProfile extends StatefulWidget {
-  const CreateProfile({Key? key}) : super(key: key);
+class CreateGroup extends StatefulWidget {
+  const CreateGroup({Key? key}) : super(key: key);
 
   @override
-  State<CreateProfile> createState() => _CreateProfileState();
+  State<CreateGroup> createState() => _CreateGroupState();
 }
 
-class _CreateProfileState extends State<CreateProfile> {
+class _CreateGroupState extends State<CreateGroup> {
   List<ChatModel> contacts = [
     ChatModel(name: "Menaka", status: "I'm Batman"),
     ChatModel(name: "Chamidu", status: "Hey there I'm using Whatsapp..!"),
