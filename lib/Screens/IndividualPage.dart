@@ -90,6 +90,79 @@ class _IndividualPage extends State<IndividualPage> {
               })
         ],
       ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            ListView(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                children: [
+                  Container(
+                      width: MediaQuery.of(context).size.width - 60,
+                      child: Card(
+                          margin: EdgeInsets.only(left: 2, right: 2, bottom: 8),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                          child: TextField(
+                            textAlignVertical: TextAlignVertical.center,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 5,
+                            minLines: 1,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Type a message",
+                                prefixIcon: IconButton(
+                                  icon: Icon(
+                                    Icons.emoji_emotions,
+                                    color: Color(0xFF128C7E),
+                                  ),
+                                  onPressed: () {},
+                                ),
+                                suffixIcon: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.attach_file,
+                                        color: Color(0xFF128C7E),
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.camera_alt,
+                                        color: Color(0xFF128C7E),
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                ),
+                                contentPadding: EdgeInsets.all(5)),
+                          ))),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(bottom: 8, right: 5, left: 2),
+                    child: CircleAvatar(
+                      backgroundColor: Color(0xFF128C7E),
+                      radius: 25,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.mic,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
