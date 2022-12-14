@@ -1,3 +1,4 @@
+import 'package:chat_app/Screens/SelectContact.dart';
 import 'package:chat_app/Widgets/CustomCard.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/Model/ChatModel.dart';
@@ -47,7 +48,10 @@ class _ChatPage extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (builder) => SelectContatct()))
+        },
         child: Icon(Icons.chat),
       ),
       body: ListView.builder(
