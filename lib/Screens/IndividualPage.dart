@@ -1,4 +1,6 @@
 import 'package:chat_app/Model/ChatModel.dart';
+import 'package:emoji_picker_2/emoji_picker_2.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -11,9 +13,20 @@ class IndividualPage extends StatefulWidget {
 }
 
 class _IndividualPage extends State<IndividualPage> {
+  bool showEmojiPicker = false;
+  FocusNode focusNode = FocusNode();
+  TextEditingController _controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        setState(() {
+          showEmojiPicker = false;
+        });
+      }
+    });
   }
 
   @override
@@ -93,76 +106,115 @@ class _IndividualPage extends State<IndividualPage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            ListView(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width - 60,
-                      child: Card(
-                          margin: EdgeInsets.only(left: 2, right: 2, bottom: 8),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25)),
-                          child: TextField(
-                            textAlignVertical: TextAlignVertical.center,
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 5,
-                            minLines: 1,
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Type a message",
-                                prefixIcon: IconButton(
-                                  icon: Icon(
-                                    Icons.emoji_emotions,
-                                    color: Color(0xFF128C7E),
-                                  ),
-                                  onPressed: () {},
-                                ),
-                                suffixIcon: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.attach_file,
-                                        color: Color(0xFF128C7E),
+        child: WillPopScope(
+          child: Stack(
+            children: [
+              ListView(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                            width: MediaQuery.of(context).size.width - 60,
+                            child: Card(
+                                margin: EdgeInsets.only(
+                                    left: 2, right: 2, bottom: 8),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)),
+                                child: TextField(
+                                  controller: _controller,
+                                  focusNode: focusNode,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: 5,
+                                  minLines: 1,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: "Type a message",
+                                      prefixIcon: IconButton(
+                                        icon: Icon(
+                                          Icons.emoji_emotions,
+                                          color: Color(0xFF128C7E),
+                                        ),
+                                        onPressed: () {
+                                          focusNode.unfocus();
+                                          focusNode.canRequestFocus = false;
+                                          setState(() {
+                                            showEmojiPicker = !showEmojiPicker;
+                                          });
+                                        },
                                       ),
-                                      onPressed: () {},
-                                    ),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.camera_alt,
-                                        color: Color(0xFF128C7E),
+                                      suffixIcon: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.attach_file,
+                                              color: Color(0xFF128C7E),
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.camera_alt,
+                                              color: Color(0xFF128C7E),
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                        ],
                                       ),
-                                      onPressed: () {},
-                                    ),
-                                  ],
-                                ),
-                                contentPadding: EdgeInsets.all(5)),
-                          ))),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 8, right: 5, left: 2),
-                    child: CircleAvatar(
-                      backgroundColor: Color(0xFF128C7E),
-                      radius: 25,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.mic,
-                          color: Colors.white,
+                                      contentPadding: EdgeInsets.all(5)),
+                                ))),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 8, right: 5, left: 2),
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xFF128C7E),
+                            radius: 25,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.mic,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
                         ),
-                        onPressed: () {},
-                      ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                    showEmojiPicker ? emojiSelect() : Container(),
+                  ],
+                ),
+              )
+            ],
+          ),
+          onWillPop: () {
+            if (showEmojiPicker) {
+              setState(() {
+                showEmojiPicker = false;
+              });
+            } else {
+              Navigator.pop(context);
+            }
+            return Future.value(false);
+          },
         ),
       ),
+    );
+  }
+
+  Widget emojiSelect() {
+    return EmojiPicker2(
+      rows: 4,
+      columns: 7,
+      onEmojiSelected: (emoji, category) {
+        setState(() {
+          _controller.text = _controller.text + emoji.emoji;
+        });
+      },
     );
   }
 }
