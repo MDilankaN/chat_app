@@ -10,24 +10,21 @@ class ButtonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Color(0xff25D366),
-            radius: 23,
-            child: Icon(
-              icon,
-              size: 26,
-              color: Colors.white,
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Color(0xff25D366),
+          radius: 23,
+          child: Icon(
+            icon,
+            size: 26,
+            color: Colors.white,
           ),
-          title: Text(
-            titleName,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          ),
+        ),
+        title: Text(
+          titleName,
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
         ),
       ),
     );

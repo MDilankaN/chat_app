@@ -1,4 +1,5 @@
 import 'package:chat_app/Model/ChatModel.dart';
+import 'package:chat_app/Screens/CreateProfile.dart';
 import 'package:chat_app/Widgets/ButtonCard.dart';
 import 'package:chat_app/Widgets/ContactCard.dart';
 import 'package:flutter/material.dart';
@@ -56,9 +57,17 @@ class _SelectContatctState extends State<SelectContatct> {
             itemCount: contacts.length + 2,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return ButtonCard(
-                  icon: Icons.group,
-                  titleName: "New group",
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => CreateProfile()));
+                  },
+                  child: ButtonCard(
+                    icon: Icons.group,
+                    titleName: "New group",
+                  ),
                 );
               } else if (index == 1) {
                 return ButtonCard(
