@@ -1,14 +1,18 @@
+import 'package:emoji_picker_2/emoji_lists.dart';
+
 class ChatModel {
   late String name;
   late String icon;
   late bool isGroup;
   late String time;
   late String currentMsg;
+  late String status;
 
   ChatModel(
-      {required this.name,
-      required this.icon,
-      required this.currentMsg,
-      required this.time,
-      required this.isGroup});
+      {this.name = "",
+      this.icon = "",
+      this.currentMsg = "",
+      this.time = "",
+      this.isGroup = false,
+      this.status = ""});
 }
