@@ -20,6 +20,8 @@ class _CreateGroupState extends State<CreateGroup> {
     ChatModel(name: "Dasmitha", status: "I'm a Developer"),
   ];
 
+  List<ChatModel> groups = [];
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -44,7 +46,21 @@ class _CreateGroupState extends State<CreateGroup> {
         body: ListView.builder(
             itemCount: contacts.length,
             itemBuilder: (context, index) {
-              return InkWell(child: ContactCard(contact: contacts[index]));
+              return InkWell(
+                  onTap: () {
+                    if (contacts[index].select == false) {
+                      setState(() {
+                        contacts[index].select = true;
+                        groups.add(contacts[index]);
+                      });
+                    } else {
+                      setState(() {
+                        contacts[index].select = false;
+                        groups.remove(contacts[index]);
+                      });
+                    }
+                  },
+                  child: ContactCard(contact: contacts[index]));
             }));
   }
 }
