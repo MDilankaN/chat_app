@@ -39,24 +39,12 @@ class _CreateGroupState extends State<CreateGroup> {
               ]),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-            PopupMenuButton<String>(
-                onSelected: ((value) => {print(value)}),
-                itemBuilder: (BuildContext context) {
-                  return [
-                    PopupMenuItem(
-                        child: Text("Invite a friend"),
-                        value: "Invite a friend"),
-                    PopupMenuItem(child: Text("Contacts"), value: "Contacts"),
-                    PopupMenuItem(child: Text("Refresh"), value: "Refresh"),
-                    PopupMenuItem(child: Text("Help"), value: "Help"),
-                  ];
-                })
           ],
         ),
         body: ListView.builder(
             itemCount: contacts.length,
             itemBuilder: (context, index) {
-              return ContactCard(contact: contacts[index]);
+              return InkWell(child: ContactCard(contact: contacts[index]));
             }));
   }
 }
