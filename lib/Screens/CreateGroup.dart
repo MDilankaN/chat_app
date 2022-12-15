@@ -59,23 +59,29 @@ class _CreateGroupState extends State<CreateGroup> {
         body: Stack(
           children: [
             ListView.builder(
-                itemCount: contacts.length,
+                itemCount: contacts.length + 1,
                 itemBuilder: (context, index) {
-                  return InkWell(
-                      onTap: () {
-                        if (contacts[index].select == false) {
-                          setState(() {
-                            contacts[index].select = true;
-                            groups.add(contacts[index]);
-                          });
-                        } else {
-                          setState(() {
-                            contacts[index].select = false;
-                            groups.remove(contacts[index]);
-                          });
-                        }
-                      },
-                      child: ContactCard(contact: contacts[index]));
+                  if (index == 0) {
+                    return Container(
+                      height: groups.length > 0 ? 90 : 5,
+                    );
+                  } else {
+                    return InkWell(
+                        onTap: () {
+                          if (contacts[index - 1].select == false) {
+                            setState(() {
+                              contacts[index - 1].select = true;
+                              groups.add(contacts[index - 1]);
+                            });
+                          } else {
+                            setState(() {
+                              contacts[index - 1].select = false;
+                              groups.remove(contacts[index - 1]);
+                            });
+                          }
+                        },
+                        child: ContactCard(contact: contacts[index - 1]));
+                  }
                 }),
             groups.length > 0
                 ? Column(
