@@ -10,28 +10,47 @@ class ContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.blueGrey[200],
-          radius: 23,
-          child: SvgPicture.asset(
-            'person.svg',
-            color: Colors.white,
-            height: 30,
-            width: 30,
-          ),
+    return ListTile(
+      leading: Container(
+        height: 53,
+        width: 50,
+        child: Stack(
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.blueGrey[200],
+              radius: 23,
+              child: SvgPicture.asset(
+                'person.svg',
+                color: Colors.white,
+                height: 30,
+                width: 30,
+              ),
+            ),
+            contact.select
+                ? Positioned(
+                    bottom: 1,
+                    right: 4,
+                    child: CircleAvatar(
+                        radius: 11,
+                        backgroundColor: Colors.teal,
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: 18,
+                        )),
+                  )
+                : Container()
+          ],
         ),
-        title: Text(
-          contact.name,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          contact.status,
-          style: TextStyle(
-            fontSize: 13,
-          ),
+      ),
+      title: Text(
+        contact.name,
+        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        contact.status,
+        style: TextStyle(
+          fontSize: 13,
         ),
       ),
     );
