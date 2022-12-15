@@ -77,28 +77,38 @@ class _CreateGroupState extends State<CreateGroup> {
                       },
                       child: ContactCard(contact: contacts[index]));
                 }),
-            Column(
-              children: [
-                Container(
-                  height: 75,
-                  color: Colors.white,
-                  child: ListView.builder(
-                    itemCount: groups.length,
-                    itemBuilder: (context, index) {
-                      if (groups[index].select == true) {
-                        return CustomAvatarCard(contact: groups[index]);
-                      } else {
-                        return Container();
-                      }
-                    },
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-                Divider(
-                  thickness: 1,
-                )
-              ],
-            ),
+            groups.length > 0
+                ? Column(
+                    children: [
+                      Container(
+                        height: 75,
+                        color: Colors.white,
+                        child: ListView.builder(
+                          itemCount: contacts.length,
+                          itemBuilder: (context, index) {
+                            if (contacts[index].select == true) {
+                              return InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      contacts[index].select = false;
+                                      groups.remove(contacts[index]);
+                                    });
+                                  },
+                                  child: CustomAvatarCard(
+                                      contact: contacts[index]));
+                            } else {
+                              return Container();
+                            }
+                          },
+                          scrollDirection: Axis.horizontal,
+                        ),
+                      ),
+                      Divider(
+                        thickness: 1,
+                      )
+                    ],
+                  )
+                : Container(),
           ],
         ));
   }
