@@ -5,6 +5,7 @@ import 'package:emoji_picker_2/emoji_picker_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
   const IndividualPage({Key? key, required this.chatModel}) : super(key: key);
@@ -22,6 +23,7 @@ class _IndividualPage extends State<IndividualPage> {
   @override
   void initState() {
     super.initState();
+    connect();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
         setState(() {
@@ -29,6 +31,15 @@ class _IndividualPage extends State<IndividualPage> {
         });
       }
     });
+  }
+
+  void connect() {
+    IO.Socket socket = IO.io("http://192.168.8.103:5000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false
+    });
+    socket.connect();
+    socket.onConnect((data) => print('connected'));
   }
 
   @override
