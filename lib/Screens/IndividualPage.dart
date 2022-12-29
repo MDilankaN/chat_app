@@ -1,4 +1,6 @@
 import 'package:chat_app/Model/ChatModel.dart';
+import 'package:chat_app/Widgets/OwnMessage.dart';
+import 'package:chat_app/Widgets/ReplyMessage.dart';
 import 'package:emoji_picker_2/emoji_picker_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +121,28 @@ class _IndividualPage extends State<IndividualPage> {
             child: WillPopScope(
               child: Stack(
                 children: [
-                  ListView(),
+                  Container(
+                    height: MediaQuery.of(context).size.height - 120,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        OwnMessage(),
+                        OwnMessage(),
+                        ReplyMessage(),
+                        ReplyMessage(),
+                        OwnMessage(),
+                        OwnMessage(),
+                        ReplyMessage(),
+                        ReplyMessage(),
+                        OwnMessage(),
+                        OwnMessage(),
+                        OwnMessage(),
+                        ReplyMessage(),
+                        ReplyMessage(),
+                        OwnMessage(),
+                      ],
+                    ),
+                  ),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Column(
