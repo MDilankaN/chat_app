@@ -40,6 +40,7 @@ class _IndividualPage extends State<IndividualPage> {
     });
     socket.connect();
     socket.onConnect((data) => print('connected'));
+    socket.emit('/test', "hello world");
   }
 
   @override
