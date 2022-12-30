@@ -1,6 +1,7 @@
 import 'package:chat_app/Model/ChatModel.dart';
 import 'package:chat_app/Widgets/OwnMessage.dart';
 import 'package:chat_app/Widgets/ReplyMessage.dart';
+import 'package:chat_app/keys.dart';
 import 'package:emoji_picker_2/emoji_picker_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _IndividualPage extends State<IndividualPage> {
   }
 
   void connect() {
-    IO.Socket socket = IO.io("", <String, dynamic>{
+    IO.Socket socket = IO.io(SERVER_URL, <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false
     });
