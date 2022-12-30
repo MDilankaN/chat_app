@@ -34,7 +34,7 @@ class _IndividualPage extends State<IndividualPage> {
   }
 
   void connect() {
-    IO.Socket socket = IO.io("http://192.168.8.103:5000", <String, dynamic>{
+    IO.Socket socket = IO.io("", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false
     });
