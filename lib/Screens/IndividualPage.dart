@@ -23,7 +23,10 @@ class _IndividualPage extends State<IndividualPage> {
   bool showEmojiPicker = false;
   FocusNode focusNode = FocusNode();
   TextEditingController _controller = TextEditingController();
-
+  IO.Socket socket = IO.io(SERVER_URL, <String, dynamic>{
+    "transports": ["websocket"],
+    "autoConnect": false
+  });
   bool sendBtn = false;
 
   @override
@@ -40,13 +43,14 @@ class _IndividualPage extends State<IndividualPage> {
   }
 
   void connect() {
-    IO.Socket socket = IO.io(SERVER_URL, <String, dynamic>{
-      "transports": ["websocket"],
-      "autoConnect": false
-    });
     socket.connect();
     socket.onConnect((data) => print('connected'));
     socket.emit('signin', widget.sourceChat.id); // /test is the event
+  }
+
+  void sendMessage(String message, int sourceID, int targetID) {
+    print('message');
+    socket.emit("message", {message, sourceID, targetID});
   }
 
   @override
@@ -251,7 +255,18 @@ class _IndividualPage extends State<IndividualPage> {
                                     sendBtn ? Icons.send : Icons.mic,
                                     color: Colors.white,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (sendBtn) {
+                                      sendMessage(
+                                          _controller.text,
+                                          widget.sourceChat.id,
+                                          widget.chatModel.id);
+                                      _controller.clear();
+                                      setState(() {
+                                        sendBtn = false;
+                                      });
+                                    }
+                                  },
                                 ),
                               ),
                             ),
