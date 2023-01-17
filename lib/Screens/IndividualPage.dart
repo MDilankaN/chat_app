@@ -9,9 +9,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndividualPage extends StatefulWidget {
-  const IndividualPage({Key? key, required this.chatModel}) : super(key: key);
+  const IndividualPage(
+      {Key? key, required this.chatModel, required this.sourceChat})
+      : super(key: key);
 
   final ChatModel chatModel;
+  final ChatModel sourceChat;
   @override
   State<IndividualPage> createState() => _IndividualPage();
 }
@@ -20,10 +23,7 @@ class _IndividualPage extends State<IndividualPage> {
   bool showEmojiPicker = false;
   FocusNode focusNode = FocusNode();
   TextEditingController _controller = TextEditingController();
-  IO.Socket socket = IO.io(SERVER_URL, <String, dynamic>{
-    "transports": ["websocket"],
-    "autoConnect": false
-  });
+
   bool sendBtn = false;
 
   @override
@@ -40,9 +40,13 @@ class _IndividualPage extends State<IndividualPage> {
   }
 
   void connect() {
+    IO.Socket socket = IO.io(SERVER_URL, <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false
+    });
     socket.connect();
     socket.onConnect((data) => print('connected'));
-    socket.emit('/test', "hello world"); // /test is the event
+    socket.emit('signin', widget.sourceChat.id); // /test is the event
   }
 
   @override

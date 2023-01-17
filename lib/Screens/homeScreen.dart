@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage>
           controller: _controller,
           children: [
             Text("camera"),
-            ChatPage(chats: widget.chats),
+            ChatPage(chats: widget.chats, sourceChat: widget.sourceChat),
             Text("status"),
             Text("callse"),
           ],
