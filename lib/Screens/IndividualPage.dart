@@ -20,6 +20,11 @@ class _IndividualPage extends State<IndividualPage> {
   bool showEmojiPicker = false;
   FocusNode focusNode = FocusNode();
   TextEditingController _controller = TextEditingController();
+  IO.Socket socket = IO.io(SERVER_URL, <String, dynamic>{
+    "transports": ["websocket"],
+    "autoConnect": false
+  });
+  bool sendBtn = false;
 
   @override
   void initState() {
@@ -35,10 +40,6 @@ class _IndividualPage extends State<IndividualPage> {
   }
 
   void connect() {
-    IO.Socket socket = IO.io(SERVER_URL, <String, dynamic>{
-      "transports": ["websocket"],
-      "autoConnect": false
-    });
     socket.connect();
     socket.onConnect((data) => print('connected'));
     socket.emit('/test', "hello world"); // /test is the event
@@ -179,6 +180,17 @@ class _IndividualPage extends State<IndividualPage> {
                                       keyboardType: TextInputType.multiline,
                                       maxLines: 5,
                                       minLines: 1,
+                                      onChanged: (value) {
+                                        if (value.length > 0) {
+                                          setState(() {
+                                            sendBtn = true;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            sendBtn = false;
+                                          });
+                                        }
+                                      },
                                       decoration: InputDecoration(
                                           border: InputBorder.none,
                                           hintText: "Type a message",
@@ -232,7 +244,7 @@ class _IndividualPage extends State<IndividualPage> {
                                 radius: 25,
                                 child: IconButton(
                                   icon: Icon(
-                                    Icons.mic,
+                                    sendBtn ? Icons.send : Icons.mic,
                                     color: Colors.white,
                                   ),
                                   onPressed: () {},
