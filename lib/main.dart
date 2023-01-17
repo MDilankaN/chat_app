@@ -1,3 +1,4 @@
+import 'package:chat_app/Screens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/Screens/homeScreen.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
           fontFamily: "OpenSans",
           primaryColor: const Color(0xff075e54),
           accentColor: const Color(0xff128c7e)),
-      home: const MyHomePage(title: 'Chat App Clone'),
+      home: const LoginScreen(),
     );
   }
 }

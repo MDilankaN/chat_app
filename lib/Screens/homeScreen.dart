@@ -1,9 +1,17 @@
+import 'package:chat_app/Model/ChatModel.dart';
 import 'package:chat_app/Pages/ChatPage.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage(
+      {Key? key,
+      required this.title,
+      required this.chats,
+      required this.sourceChat})
+      : super(key: key);
   final String title;
+  final List<ChatModel> chats;
+  final ChatModel sourceChat;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -59,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage>
           controller: _controller,
           children: [
             Text("camera"),
-            ChatPage(),
+            ChatPage(chats: widget.chats),
             Text("status"),
             Text("callse"),
           ],
